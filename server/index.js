@@ -56,12 +56,21 @@ function getBaseUrl(req) {
   return `${proto}://${host}`;
 }
 
-function absolutizeIfNeeded(s, req) {
+function absUrlIfNeeded(s, req) {
   if (!s) return s;
+  // уже абсолютный URL — не трогаем
   if (/^https?:\/\//i.test(s)) return s;
-  const base = getBaseUrl(req);
-  return `${base}${s.startsWith('/') ? '' : '/'}${s}`;
+
+  // абсолютизируем только «путь» (начинается со слеша), например /uploads/....
+  if (s.startsWith('/')) {
+    const base = getBaseUrl(req);
+    return `${base}${s}`;
+  }
+
+  // обычный текст: ничего не делаем
+  return s;
 }
+
 
 // =============== DB (SQLite) =================
 const db = new Database(DB_FILE);
