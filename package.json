@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "ISC",
   "scripts": {
-    "start-all": "node scripts/start-all.js"
+    "build": "cd client && npm install && npm run build",
+    "start": "node server/index.js"
   },
   "devDependencies": {
     "ngrok": "^5.0.0",
