@@ -1,0 +1,16 @@
+# root
+node_modules
+*.log
+
+# client
+client/node_modules
+client/dist
+
+# server
+server/node_modules
+server/uploads
+server/*.log
+
+# OS junk
+.DS_Store
+Thumbs.db

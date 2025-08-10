@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: taskboard-chat
+    env: node
+    region: frankfurt
+    rootDir: server
+    buildCommand: |
+      cd ../client && npm ci && npm run build && cd ../server && npm ci
+    startCommand: node index.js
+    plan: free
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 2
+    envVars:
+      - key: DATA_DIR
+        value: /data
+      - key: DB_FILE
+        value: /data/chat.db
+      - key: UPLOAD_DIR
+        value: /data/uploads
+      # PUBLIC_BASE_URL добавим позже в веб-интерфейсе после первого деплоя:
+      - key: PUBLIC_BASE_URL
+        sync: false
